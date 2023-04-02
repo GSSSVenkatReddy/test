@@ -14,6 +14,12 @@ const products = [
 ];
 
 function App() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
   return (
     <div>
       <TestHeading heading={{text: 'test', size: 1}} />
@@ -27,6 +33,10 @@ function App() {
       <TestHeading heading={{text: 'Counters that update seperately', size: 2}} />
       <ButtonWithState /><br />
       <ButtonWithState />
+
+      <TestHeading heading={{text: 'Counters that update together', size: 1}} />
+      <ButtonWithHook count={count} onClick={handleClick}/><br />
+      <ButtonWithHook count={count} onClick={handleClick}/>
     </div>
   );
 }
@@ -99,6 +109,14 @@ function ButtonWithState() {
   return(
     <button onClick={handleClick}>
       Clicked {count} times
+    </button>
+  );
+}
+
+function ButtonWithHook({ count, onClick }) {
+  return(
+    <button onClick={onClick}>
+      Clicked {count} times.
     </button>
   );
 }
